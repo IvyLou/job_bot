@@ -1,0 +1,13 @@
+# Hand-picked companies to track whether or not they're hiring, grouped by category (the category becomes the
+# company's lane). Each entry: name, domain, and optionally location (a key of `locations` in search.yaml; default:
+# the first one). This file is an example: copy it to local/seeds.yaml and list your own.
+
+devtools:
+  - {name: Vercel, domain: vercel.com, location: remote}
+  - {name: Airtable, domain: airtable.com}
+
+climate:
+  - {name: Watershed, domain: watershed.com}
+
+healthtech:
+  - {name: Color Health, domain: color.com}

@@ -1,0 +1,9 @@
+[server]
+headless = true
+address = "127.0.0.1"   # only this Mac can open the dashboard
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"

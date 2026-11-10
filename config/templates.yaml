@@ -1,0 +1,108 @@
+# Outreach messages (an example: copy to local/templates.yaml and make it yours). The dashboard re-reads the file
+# on every page load.
+# Fields filled in automatically: {first_name} {company} {role} {my_name} {my_linkedin}
+#   {pitch}        your resume numbers for this kind of role (email), from pitches.yaml
+#   {pitch_short}  the one-sentence version for LinkedIn
+#   {focus}        the area, e.g. "analytics", "operations"
+#   {skills}       what your background covers, e.g. "SQL, dashboards, and experiment analysis"
+# A field with no value shows as [role] etc., and the dashboard flags any [bracketed] text left to fill in.
+# LinkedIn connection notes: 200 characters on a free account, 300 with Premium.
+
+founder_outreach:
+  label: "Founder / leader (no open role needed)"
+  subject: "Interested in {focus} at {company}"
+  email: |
+    Hi {first_name},
+
+    I'm {my_name}, and I'd like to help {company} with {focus}. {pitch}
+
+    Could we talk for 15 minutes this week?
+
+    Best,
+    {my_name}
+    {my_linkedin}
+  linkedin: "Hi {first_name}, I'd like to help {company} with {focus}. {pitch_short} Open to a quick chat?"
+
+apply_and_reach_out:
+  label: "Applied to a role, now reaching out"
+  subject: "Applied for {role}: {my_name}"
+  email: |
+    Hi {first_name},
+
+    I just applied for the {role} role at {company}. {pitch}
+
+    Could we talk for 15 minutes this week? I'd like to hear what the team needs most and show how I can help.
+
+    Best,
+    {my_name}
+    {my_linkedin}
+  linkedin: "Hi {first_name}, I applied for your {role} opening. {pitch_short} Open to a quick chat?"
+
+recruiter_after_applying:
+  label: "Recruiter, after applying (big companies)"
+  subject: "{role} application: {my_name}"
+  email: |
+    Hi {first_name},
+
+    I recently applied for the {role} role at {company} and wanted to introduce myself. I have [N] years of experience in [your field], with a background in {skills}.
+
+    I'm excited about the role's focus on [what the role focuses on] and would love to connect!
+
+    Best,
+    {my_name}
+  linkedin: "Hi {first_name}, I applied for the {role} role and wanted to introduce myself. I have [N] years of experience in [your field]. Would love to connect!"
+
+big_company_networking:
+  label: "Larger company (bank, asset manager, big tech): learn the team first"
+  subject: "Interested in {focus} at {company}"
+  email: |
+    Hi {first_name},
+
+    I'm {my_name}, and I'm looking to join {company}'s {focus} team. {pitch}
+
+    Could I ask you a few questions about the team in a 15-minute call this week?
+
+    Best,
+    {my_name}
+    {my_linkedin}
+  linkedin: "Hi {first_name}, I'm looking to join {company}'s {focus} team. {pitch_short} Could I ask you a few questions?"
+
+warm_intro:
+  label: "Someone you know (LinkedIn connection, alum, former colleague)"
+  subject: "Quick question about {company}"
+  email: |
+    Hi {first_name},
+
+    Hope you're doing well! I'm looking for {focus} roles, and {company} is at the top of my list. {pitch}
+
+    Would you have 15 minutes to tell me about the team and how you'd approach getting in?
+
+    Thanks so much,
+    {my_name}
+  linkedin: "Hi {first_name}, hope you're well! I'm looking for {focus} roles and {company} is at the top of my list. Could I ask you about the team?"
+
+follow_up_1:
+  label: "Follow-up 1 (about 4 days later)"
+  subject: "Re: {company}"
+  email: |
+    Hi {first_name},
+
+    Following up on my note about {company}. In short: {pitch_short}
+
+    Would 15 minutes this week or next work?
+
+    Best,
+    {my_name}
+  linkedin: "Hi {first_name}, following up on {company}. {pitch_short} Would 15 minutes this week or next work?"
+
+follow_up_2:
+  label: "Follow-up 2 (about 10 days after first message), the last one"
+  subject: "Re: {company}"
+  email: |
+    Hi {first_name},
+
+    One last note: I'd still welcome 15 minutes about {focus} at {company}. Thanks either way.
+
+    Best,
+    {my_name}
+  linkedin: "Hi {first_name}, one last note: I'd still welcome 15 minutes about {focus} at {company}. Thanks either way!"

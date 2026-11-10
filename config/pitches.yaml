@@ -1,0 +1,46 @@
+# The resume numbers each message leads with, one version per kind of role. This file is an example: copy it to
+# local/pitches.yaml and replace every line with your own results. Only use numbers you can back up.
+# The dashboard picks the version under `pick`: by the role's family, else by the company's category, else the
+# default. Change it per message in "Numbers to lead with".
+#
+#   label     what the dashboard calls this version
+#   focus     fills {focus} in messages: "I'd like to help Acme with analytics"
+#   skills    fills {skills}: "a background in SQL, dashboards, and experiment analysis"
+#   email     fills {pitch}: one or two sentences for emails
+#   linkedin  fills {pitch_short}: one sentence for LinkedIn notes (200 characters on a free account)
+
+pick:
+  role_families:
+    analytics: analytics
+    analytics_engineering: analytics
+    product_ops: operations
+  company_categories:           # checked in order; the first that shares a category with the company wins
+    operations: [devtools]
+  default: general
+
+versions:
+  analytics:
+    label: "Analytics"
+    focus: "analytics"
+    skills: "SQL, dashboards, and experiment analysis"
+    email: >-
+      At Example Co I built the weekly revenue dashboard 40 managers use and cut reporting from two days to two hours.
+      I also designed the pricing test that lifted checkout conversion 8%.
+    linkedin: "I built Example Co's revenue dashboard (40 managers) and cut reporting from 2 days to 2 hours."
+
+  operations:
+    label: "Operations"
+    focus: "business operations"
+    skills: "process design, forecasting, and SQL"
+    email: >-
+      At Example Co I rebuilt the order-fulfillment forecast, cutting stockouts 30%, and automated the weekly ops review
+      that used to take a full day.
+    linkedin: "I cut stockouts 30% at Example Co by rebuilding the fulfillment forecast."
+
+  general:
+    label: "General"
+    focus: "analytics and operations"
+    skills: "SQL, forecasting, and dashboards"
+    email: >-
+      At Example Co I built the revenue dashboard 40 managers use and the forecast behind our inventory plan.
+    linkedin: "I built Example Co's revenue dashboard and inventory forecast."

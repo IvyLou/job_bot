@@ -1,0 +1,8 @@
+# VC funds and accelerators whose portfolios feed the company universe. For each fund the tool looks for a
+# Getro-hosted job board (jobs., careers. or talent.<domain>) and pulls every portfolio company in your locations.
+# Funds without one are skipped. Group them however you like. This file is an example: copy it to local/vcs.yaml.
+
+sf_bay:
+  - {name: Greylock, domain: greylock.com}
+  - {name: Kleiner Perkins, domain: kleinerperkins.com}
+  - {name: Initialized Capital, domain: initialized.com}

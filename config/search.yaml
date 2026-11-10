@@ -1,0 +1,83 @@
+# What the sourcing engine looks for. This file is an example (someone looking for analytics roles in the SF Bay Area
+# or remote): copy it to local/search.yaml and make it yours. Every command re-reads it; after editing, run
+# `python -m jobsearch rank` to re-score stored roles without refetching.
+
+http:
+  # The SEC requires automated clients to identify themselves with a name and contact email (Form D sources).
+  sec_user_agent: "Your Name you@example.com"
+  web_user_agent: "Mozilla/5.0 (compatible; jobsearch-tool/0.1; personal job search)"
+  concurrency: 16
+  timeout_seconds: 12
+
+# Your locations, in order. The first is home (listed first, and its priority-category companies can reach Tier 1).
+#   label   what the dashboard shows
+#   weight  how much a role or company here counts toward relevance (0-1)
+#   match   regex for free-text locations ("Oakland, CA"); checked in order, first match wins
+#   states  states whose SEC Form D filers count as this location
+# `remote` (in the US) and `us` ("United States" with no city) are recognized without a pattern; `us` is scored but
+# companies aren't sourced from it.
+locations:
+  sf_bay:
+    label: SF Bay
+    weight: 1.0
+    match: 'san francisco|\bsf\b|bay area|oakland|berkeley|emeryville|palo alto|menlo park|mountain view|sunnyvale|san mateo|redwood city|san jose|south san francisco'
+    states: [CA]
+  remote:
+    label: Remote
+    weight: 0.9
+  us:
+    label: US
+    weight: 0.5      # often remote, not confirmed
+
+formd:
+  quarters: [2026q2, 2026q3]   # SEC bulk data sets to backfill
+  daily_since: 2026-10-01      # after the last bulk quarter, pull filings day by day
+  states: [CA]
+  min_raise_usd: 1000000        # counted on amount actually sold, not the offering size
+  entity_types: [Corporation]   # venture-backed startups are C-corps; LLCs are mostly funds, films, SPVs
+  industry_lanes:               # Form D industry -> categories for the companies it brings in
+    'Other Health Care': [healthtech]
+    'Other Energy': [climate]
+    'Electric Utilities': [climate]
+  exclude_industries: [Investing, Investment Banking, Pooled Investment Fund, REITS and Finance, Commercial,
+                       Residential, Other Real Estate, Construction, Restaurants, Lodging and Conventions,
+                       Oil and Gas, Coal Mining, Agriculture]
+
+# Company categories ("lanes"), matched against industry, tags and description. Priority lanes get a ranking boost.
+lanes:
+  ai: [artificial intelligence, machine learning, llm, generative ai]
+  climate: [climate, energy, solar, battery, grid, carbon, renewables, decarbonization]
+  healthtech: [healthcare, health, clinical, patient, telehealth]
+  devtools: [developer tools, devops, api, open source]
+priority_lanes: [climate, healthtech]
+
+# Workday boards are searched by keyword rather than read in full.
+workday_queries: ['data analyst', 'analytics', 'business intelligence']
+
+titles:
+  # Role families, each with a weight (0-1) and regex fragments matched case-insensitively against job titles.
+  # The first family that matches wins, so order matters.
+  families:
+    analytics_engineering:
+      weight: 0.9
+      patterns: ['analytics engineer', 'data engineer']
+    analytics:
+      weight: 1.0
+      patterns: ['data analyst', 'analytics', 'business intelligence', '\bbi analyst', 'insights analyst', 'product analyst']
+    product_ops:
+      weight: 0.75
+      patterns: ['product operations', 'business operations', 'bizops']
+  exclude: ['\bintern(ship)?\b', 'recruit', '\bsales\b', 'customer success', 'support', 'marketing(?! analytics)', 'security']
+  too_senior: ['director', 'vice president', '\bvp\b', 'head of', 'chief', 'principal', '\bstaff\b', 'senior manager']
+
+# Priority matches: roles whose posting asks for your years of experience and names a background you have as one that
+# fits. Read from the posting's text by rule; the dashboard quotes the lines each rule matched.
+priority_match:
+  description: "Analytics roles whose posting asks for 1–3 years and names e-commerce or marketplace experience as a background that fits."
+  families: [analytics]            # every title in these families counts ...
+  titles: ['growth analyst']       # ... plus these
+  exclude_titles: ['scientist']
+  years: [1, 3]                    # the posting's stated range must overlap this: 0–3, 2+ and 3–5 do; 4–6 doesn't
+  locations: [sf_bay, remote]
+  # A line counts when one of these sits near "experience", "background", "former", "prior" and the like.
+  backgrounds: ['e-?commerce', 'marketplaces?', '\bretail\b', 'consumer (tech|internet)']

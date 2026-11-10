@@ -1,0 +1,50 @@
+# Dashboard and outreach settings. This file is an example: copy it to local/crm.yaml and make it yours.
+
+targets:                 # per day, shown on the Today page
+  new_outreach: 25
+  follow_ups: 10
+  applications: 5
+
+company_size:                 # who to contact: CEO/founder up to early_max people, head of the team up to
+  early_max: 50               # growth_max, and above that (or hand-picked firms of unknown size) the hiring
+  growth_max: 300             # manager plus the recruiter
+
+# The team a role sits in decides whose title to look for: the team's leader at growth-stage companies, and its
+# managers at big ones. A role goes to the team listing its family; with no role in view, a company goes to the team
+# listing one of its categories; anything else goes to default_team.
+teams:
+  data:
+    role_families: [analytics, analytics_engineering]
+    leader: '\b(chief data officer|head of (data|analytics)|vp,? (of )?(data|analytics)|director,? (of )?(data|analytics))\b'
+    leader_label: "Head of Data or VP Analytics"
+    leader_search: "head of data"
+    manager_label: "data or analytics manager on the team"
+    manager_search: "analytics manager"
+  operations:
+    role_families: [product_ops]
+    leader: '\b(coo|chief operating|head of (operations|business operations)|vp,? (of )?operations)\b'
+    leader_label: "COO or Head of Operations"
+    leader_search: "head of operations"
+    manager_label: "operations manager on the team"
+    manager_search: "operations manager"
+default_team: data
+hiring_manager: '\b(data|analytics|insights|operations)\b.*\b(manager|director|lead|head)\b|\b(manager|director|lead|head)\b.*\b(data|analytics|insights|operations)\b'
+
+# Titles to contact first at a company (after people you know), ahead of the CEO. Checked in order.
+first_contacts:
+  data_leader: '\b(chief data officer|head of (data|analytics)|vp,? (of )?(data|analytics))\b'
+
+linkedin_people_search: "data OR founder"   # added after the company name in "Find people on LinkedIn"
+
+follow_up_after_days: [4, 6]   # first follow-up 4 days after outreach, second 6 days after that (~day 10), then stop
+
+countdown:                    # shows a countdown on the Today page when date is set
+  label: Days until my target start date
+  date:                       # e.g. 2027-03-01
+
+daily_refresh: "07:00"        # local time for the automatic pipeline run (applied by `install-schedule`)
+
+me:
+  name: Your Name
+  email: you@gmail.com          # the Gmail account that sync reads (read-only)
+  linkedin: https://www.linkedin.com/in/your-profile
